@@ -1,0 +1,94 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="/admin/layouts/head_link.html"></th:block>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <th:block th:insert="/admin/layouts/header.html"></th:block>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <th:block th:insert="/admin/layouts/sidebar.html"></th:block>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Blank page
+                <small>it all starts here</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Examples</a></li>
+                <li class="active">Blank page</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border" style="text-align: center">
+                    <h2 class="box-title" style="font-size:50px;font-weight: 500">DANH SÁCH NGƯỜI DÙNG </h2>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered"
+                           style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin: 0 auto;width: 90%">
+                        <thead>
+                        <tr style="background-color: #00a157">
+                            <td style="width: 10px">ID</td>
+                            <td>Tên người dùng</td>
+                            <td>Email</td>
+                            <td>Address</td>
+                            <td>Phone</td>
+
+                            <td style="width: 40px">Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="li:${listUser}">
+                            <td th:text="${li.getUserId()}"></td>
+                            <td th:text="${li.getUserName()}"></td>
+                            <td th:text="${li.getEmail()}"></td>
+                            <td th:text="${li.getAddress()}"></td>
+                            <td th:text="${li.getPhone()}"></td>
+                            <td>
+                                <div class="table-button_product_manager" style="display: flex">
+                                    <a class="badge bg-light-blue" th:class="${li.status} ? 'btn btn-primary' : 'btn btn-danger'" th:text="${li.status} ? 'unlock':'lock'"
+                                            style="padding: 6px 20px; border: none; font-size: 15px; color: #fff; background-color: rgb(108, 108, 244)" th:href="@{'/admin/update_status/' + ${li.userId}}">
+
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+
+                <!-- /.box-footer-->
+            </div>
+            <!-- /.box -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <th:block th:insert="/admin/layouts/footer.html"></th:block>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+
+<th:block th:insert="/admin/layouts/script_link.html"></th:block>
+</body>
+</html>

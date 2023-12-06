@@ -1,0 +1,107 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="admin/layouts/head_link.html"></th:block>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <th:block th:insert="admin/layouts/header.html"></th:block>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <th:block th:insert="admin/layouts/sidebar.html"></th:block>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <h1 class="box-title">Chỉnh sửa sản phẩm</h1>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                                title="Remove">
+                            <i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form  th:object="${productDTO}" th:action="'/admin/update-product/'+${productDTO.productId}" method="post" enctype="multipart/form-data" >
+                        <input th:field="*{productId}" type="hidden"/>
+
+                        <div class="form_group">
+                            <label >Tên sản phẩm</label>
+                            <input th:field="*{productName}" type="text" class="form_control_item name-category" placeholder="Enter product name"/>
+                        </div>
+                        <div class="form_group">
+                            <label >Price</label>
+                            <input th:field="*{price}" type="text" class="form_control_item name-category" placeholder="Enter price"/>
+                        </div>
+                        <div class="form_group">
+                            <label >Stock</label>
+                            <input th:field="*{stock}" type="text" class="form_control_item name-category" placeholder="Enter stock"/>
+                        </div>
+                        <div class="form_group">
+                            <label for="">Category</label>
+                            <select th:field="*{category.categoryId}" class="form-control" id="">
+                                <option th:each="item : ${category}" th:value="${item.categoryId}" th:text="${item.categoryName}"></option>
+                            </select>
+                        </div>
+                        <div class="form_group">
+                            <label >Image</label>
+                            <input  type="file" class="form_control_item name-category" placeholder="" th:name="image-Update"/>
+                        </div>
+                        <div class="form_group">
+                            <label >Description</label>
+                            <input th:field="*{description}" type="text" class="form_control_item name-category" placeholder="Nhập mô tả"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <div class="form-check">
+                                <input th:field="*{status}" th:checked="*{status}" class="form-check-input" type="radio" id="language1" value="true" />
+                                <label class="form-check-label">Open</label>
+                            </div>
+                            <div class="form-check">
+                                <input th:field="*{status}" th:checked="*{!status}" class="form-check-input" type="radio" id="language2" value="false" />
+                                <label class="form-check-label">Close</label>
+                            </div>
+<!--                            <small th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="form-text text-danger"></small>-->
+                        </div>
+                        <div class="form_group">
+                            <button type="submit" class="btn_common btn_save"
+                                    style="padding: 8px 25px; border: none; font-size: 15px; color: #fff; background-color: blueviolet; border-radius: 5px">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+                <!-- /.box-footer-->
+            </div>
+            <!-- /.box -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <th:block th:insert="admin/layouts/footer.html"></th:block>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+
+<th:block th:insert="admin/layouts/script_link.html"></th:block>
+</body>
+</html>
